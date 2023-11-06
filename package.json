@@ -1,0 +1,45 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp",
+    "build": "gulp build",
+    "lint": "htmlhint **/*.html & stylelint **/*.scss",
+    "deploy": "gh-pages -d dist",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vidga1/Blog.git"
+  },
+  "keywords": [],
+  "author": "Vidga1",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vidga1/Blog/issues"
+  },
+  "homepage": "https://github.com/Vidga1/Blog#readme",
+  "devDependencies": {
+    "browser-sync": "^2.29.3",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^9.0.0",
+    "gulp-sass": "^5.1.0",
+    "htmlhint": "^1.1.4",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
+    "postcss-scss": "^4.0.9",
+    "sass": "^1.69.5",
+    "stylelint": "^15.11.0",
+    "stylelint-config-recommended": "^13.0.0",
+    "stylelint-scss": "^5.3.0"
+  },
+  "lint-staged": {
+    "*.css": "stylelint --fix"
+  },
+  "dependencies": {
+    "gh-pages": "^6.0.0"
+  }
+}
