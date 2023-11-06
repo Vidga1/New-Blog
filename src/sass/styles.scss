@@ -62,7 +62,6 @@ $nav-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
   .main-content {
     flex-grow: 1;
-    overflow: auto;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -70,7 +69,6 @@ $nav-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
     &-pages {
       flex-grow: 1;
-      overflow: auto;
       background-size: cover;
       background-repeat: no-repeat;
       background-attachment: fixed;
@@ -97,7 +95,6 @@ $nav-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
   .blog-main {
     padding: 30px;
-  }
 
   .post {
     &__title {
@@ -115,6 +112,7 @@ $nav-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       text-align: left;
     }
   }
+}
 
   .form {
     max-width: 500px;
@@ -271,5 +269,101 @@ $nav-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         0 -1px $shadow-color,
         1px 0 $shadow-color,
         0 1px $shadow-color;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .page {
+      overflow: auto; // Разрешаем прокрутку страницы
+  
+      .header__title {
+        font-size: 24px; // Уменьшаем размер шрифта заголовка
+      }
+  
+      .nav__list {
+        font-size: 18px; // Уменьшаем размер шрифта навигации
+      }
+  
+      .nav__item {
+        margin-right: 5px; // Уменьшаем отступы между элементами навигации
+      }
+  
+      .posts-list {
+        font-size: 18px; // Уменьшаем размер шрифта списка постов
+        margin-top: 20px; // Уменьшаем отступ сверху
+      }
+  
+      .post__title,
+      .post__date,
+      .post__content {
+        text-align: justify; // Выравниваем текст по ширине для лучшего чтения
+        font-size: 18px; // Унифицируем размер шрифта для всего контента поста
+      }
+  
+      .form {
+        margin: 20px auto; // Уменьшаем верхний и нижний отступы формы
+        padding: 0.5em; // Уменьшаем padding формы
+  
+        .form__label {
+          font-size: 14px; // Уменьшаем размер шрифта меток формы
+        }
+  
+        .form__input,
+        .form__textarea {
+          font-size: 14px; // Уменьшаем размер шрифта элементов ввода
+        }
+      }
+  
+      .button.form__button {
+        font-size: 16px; // Уменьшаем размер шрифта кнопок
+      }
+  
+      .navigation {
+        // Уменьшаем размер и упрощаем навигационные кнопки
+        .prev-btn,
+        .next-btn {
+          width: 40px; // Уменьшаем ширину кнопок
+          height: 40px; // Уменьшаем высоту кнопок
+          span i {
+            font-size: 30px; // Уменьшаем размер иконок внутри кнопок
+          }
+          // Можно также увеличить площадь клика, добавив padding
+        }
+      }
+  
+      .carousel li {
+        display: block;
+        position: static;
+        width: 100%; // Занимает всю ширину контейнера
+        height: 100%; // Максимальная высота, чтобы изображения не были слишком высокими
+        background-size: cover;  
+        background-position: center;  
+        overflow: hidden;
+
+        img {
+          max-width: auto; // Масштабирует изображение до ширины элемента
+          height: auto; // Автоматическая высота для сохранения пропорций
+          display: block; // Убирает возможные отступы снизу изображения
+        }
+        
+        // Корректируем позиционирование и размер текста
+        .slide-content {
+          position: absolute;
+          top: 15%; // Центрируем текст по вертикали
+          left: 50%; // Центрируем текст по горизонтали
+          transform: translate(-50%, -50%); // Смещаем текст обратно на половину его ширины и высоты
+          width: 90%; // Ограничиваем ширину текста, чтобы не прилегал вплотную к краям
+          text-align: center; // Центрируем текст в блоке
+          font-size: 16px; // Подгоняем размер текста
+          padding: 10px; // Добавляем немного внутренних отступов
+          background: rgba(0, 0, 0, 0.5); // Добавляем полупрозрачный фон для лучшей читаемости текста
+          color: #fff; // Белый цвет текста для контраста
+        }
+      }
+     .footer {
+        position: absolute; 
+        color: transparent;
+        font-size: 8px; // Уменьшаем размер шрифта футера
+      } 
     }
   }
