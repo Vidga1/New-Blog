@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
     <link rel="stylesheet" href="./css/styles.css">
     <title>Мой Блог</title>
 </head>
@@ -19,12 +20,38 @@
     </header>
 
     <main class="main-content">
-        <h2 class="content__heading">Добро пожаловать в Мой Блог!</h2>
-        <p class="content__text">Здесь вы найдете мои мысли, истории и интересные статьи.</p>
+        <div class="navigation">
+            <span class="prev-btn">
+              <i class="bx bx-chevron-left"></i>
+            </span>
+            <span class="next-btn">
+              <i class="bx bx-chevron-right"></i>
+            </span>
+          </div>
+          <ul class="carousel">
+            <li class="slide" style="background-image: url('https://rare-gallery.com/uploads/posts/1233482-climber.jpg');">
+                <div class="slide-content">
+                    <h2>Добро пожаловать в Мой Блог!</h2>
+                    <p>Здесь вы найдете мои мысли, истории и интересные статьи.</p>
+                  </div></li>
+            <li class="slide" style="background-image: url('https://registrations-production.s3.amazonaws.com/uploads/event/logo/297552/Discovery.png');">
+                <div class="slide-content">
+                    <h2>Добро пожаловать в Мой Блог!</h2>
+                    <p>Здесь вы найдете мои мысли, истории и интересные статьи.</p>
+                  </div></li>
+            <li class="slide" style="background-image: url(https://w.forfun.com/fetch/da/da0a75c7e50b1569c0fd7d85aea4b3ba.jpeg);">
+                <div class="slide-content">
+                    <h2>Добро пожаловать в Мой Блог!</h2>
+                    <p>Здесь вы найдете мои мысли, истории и интересные статьи.</p>
+                  </div>
+                </li>
+        </ul>
     </main>
 
     <footer class="footer">
         <p class="copyright">&copy; 2023 Мой Блог</p>
     </footer>
+
+    <script src="./js/script.js"></script>
 </body>
 </html>

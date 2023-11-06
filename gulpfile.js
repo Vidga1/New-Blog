@@ -1,6 +1,8 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const browserSync = require('browser-sync').create();
+const uglify = require('gulp-uglify');
+const concat = require('gulp-concat');
 
 // Пути к файлам
 const paths = {
@@ -9,8 +11,12 @@ const paths = {
     dest: 'dist/'
   },
   styles: {
-    src: 'src/sass/*.scss',
+    src: 'src/sass/**/*.scss',
     dest: 'dist/css'
+  },
+  scripts: {
+    src: 'src/js/**/*.js',
+    dest: 'dist/js'
   }
 };
 
@@ -29,7 +35,15 @@ function html() {
     .pipe(browserSync.stream());
 }
 
-// Следим за файлами и обновляем браузер
+// Обработка JavaScript файлов
+function scripts() {
+  return gulp.src(paths.scripts.src)
+    .pipe(concat('script.js')) 
+    .pipe(uglify()) 
+    .pipe(gulp.dest(paths.scripts.dest))
+    .pipe(browserSync.stream());
+}
+
 function watch() {
   browserSync.init({
     server: {
@@ -38,9 +52,10 @@ function watch() {
   });
   gulp.watch(paths.styles.src, styles);
   gulp.watch(paths.html.src, html);
+  gulp.watch(paths.scripts.src, scripts);
   gulp.watch(paths.html.dest + '*.html').on('change', browserSync.reload);
 }
 
 // Задачи по умолчанию
-gulp.task('default', gulp.parallel(styles, html, watch));
-gulp.task('build', gulp.parallel(styles, html));
+gulp.task('default', gulp.parallel(styles, html, scripts, watch));
+gulp.task('build', gulp.parallel(styles, html, scripts));
