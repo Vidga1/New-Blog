@@ -1,10 +1,22 @@
-function Carousel(containerSelector, prevButtonSelector, nextButtonSelector) {
+function Carousel(containerSelector) {
   this.container = document.querySelector(containerSelector);
   this.slides = this.container.querySelectorAll('li');
   this.totalSlides = this.slides.length;
   this.currentSlide = 0;
-  this.prevButton = document.querySelector(prevButtonSelector);
-  this.nextButton = document.querySelector(nextButtonSelector);
+  this.autoplayInterval = null;
+
+  // Создаем кнопки управления
+  this.createControlButtons = function() {
+    this.prevButton = document.createElement('button');
+    this.prevButton.innerText = '<';
+    this.prevButton.classList.add('prev-btn');
+    this.container.appendChild(this.prevButton);
+
+    this.nextButton = document.createElement('button');
+    this.nextButton.innerText = '>';
+    this.nextButton.classList.add('next-btn');
+    this.container.appendChild(this.nextButton);
+  };
 
   // Обновление отображения карусели
   this.updateCarousel = function() {
@@ -14,16 +26,31 @@ function Carousel(containerSelector, prevButtonSelector, nextButtonSelector) {
     this.slides[this.currentSlide].style.display = 'block'; // показываем текущий слайд
   };
 
-  // Инициализация событий клика
+  // Функция для автовоспроизведения
+  this.startAutoplay = function(interval) {
+    if(this.autoplayInterval) clearInterval(this.autoplayInterval); // Очистим существующий интервал, если он есть
+    this.autoplayInterval = setInterval(() => {
+      this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+      this.updateCarousel();
+    }, interval || 3000); 
+  };
+
+  // Инициализация событий клика и автовоспроизведения
   this.initEvents = function() {
+    this.createControlButtons(); // Создаем кнопки управления
+
     this.prevButton.addEventListener('click', () => {
       this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
       this.updateCarousel();
+      clearInterval(this.autoplayInterval); // Остановим автовоспроизведение при ручном переключении
+      this.startAutoplay(); // И перезапустим его заново
     });
 
     this.nextButton.addEventListener('click', () => {
       this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
       this.updateCarousel();
+      clearInterval(this.autoplayInterval); // Остановим автовоспроизведение при ручном переключении
+      this.startAutoplay(); // И перезапустим его заново
     });
 
     // Инициализация сенсорных событий
@@ -54,12 +81,15 @@ function Carousel(containerSelector, prevButtonSelector, nextButtonSelector) {
       this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
     }
     this.updateCarousel();
+    clearInterval(this.autoplayInterval); // Остановим автовоспроизведение при свайпе
+    this.startAutoplay(); // И перезапустим его заново
   };
 
   // Вызываем updateCarousel, чтобы показать первый слайд
   this.updateCarousel();
+  this.startAutoplay(); // Запускаем автовоспроизведение при инициализации
 }
 
 // Для использования карусели создаем ее экземпляр с помощью ключевого слова new
-const myCarousel = new Carousel('.carousel', '.prev-btn', '.next-btn');
+const myCarousel = new Carousel('.carousel');
 myCarousel.initEvents();
