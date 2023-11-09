@@ -129,52 +129,42 @@
 .page .form .button.form__button:active {
   background-color: rgba(8, 45, 94, 0.85);
 }
-.page .navigation {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  z-index: 99;
-  display: flex;
-  justify-content: space-between;
-}
-.page .navigation .prev-btn,
-.page .navigation .next-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  background: transparent;
-  border: 2px solid #fff;
-  border-radius: 6px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-  transition: background-color 0.5s ease;
-}
-.page .navigation .prev-btn span i,
-.page .navigation .next-btn span i {
-  font-size: 60px;
-  color: #444;
-}
-.page .navigation .prev-btn:hover,
-.page .navigation .next-btn:hover {
-  background-color: #f0f0f0;
-}
-.page .navigation .prev-btn.prev-btn,
-.page .navigation .next-btn.prev-btn {
-  transform: translateY(-50%);
-}
-.page .navigation .prev-btn.next-btn,
-.page .navigation .next-btn.next-btn {
-  transform: translateY(-50%);
-}
 .page .carousel {
   list-style: none;
   padding: 0;
   margin: 0;
   position: relative;
   height: 100%;
+}
+.page .carousel .btn, .page .carousel .next-btn, .page .carousel .prev-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: 2px solid black;
+  font-size: 2em;
+  color: black;
+  cursor: pointer;
+  padding: 10px;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 7px;
+}
+.page .carousel .btn:focus, .page .carousel .next-btn:focus, .page .carousel .prev-btn:focus {
+  outline: none;
+}
+.page .carousel .btn:hover, .page .carousel .next-btn:hover, .page .carousel .prev-btn:hover {
+  background-color: white;
+}
+.page .carousel .prev-btn {
+  left: 10px;
+}
+.page .carousel .next-btn {
+  right: 10px;
 }
 .page .carousel li {
   display: none;
