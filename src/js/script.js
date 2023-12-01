@@ -16,6 +16,11 @@ function Carousel(containerSelector) {
     this.nextButton.innerText = '>';
     this.nextButton.classList.add('next-btn');
     this.container.appendChild(this.nextButton);
+
+    this.togglePlayButton = document.createElement('button');
+    this.togglePlayButton.innerText = '⏸';
+    this.togglePlayButton.classList.add('toggle-play-btn');
+    this.container.appendChild(this.togglePlayButton);
   };
 
   // Обновление отображения карусели
@@ -35,6 +40,19 @@ function Carousel(containerSelector) {
     }, interval || 3000); 
   };
 
+  // Функция для переключения воспроизведения
+  this.toggleAutoplay = function() {
+    if(this.autoplayInterval) {
+      clearInterval(this.autoplayInterval);
+      this.autoplayInterval = null;
+      this.togglePlayButton.innerText = '▶️'; // Символ паузы
+  } else {
+    this.startAutoplay();
+    this.togglePlayButton.innerText = '⏸'; // Символ воспроизведения
+  }
+};
+
+
   // Инициализация событий клика и автовоспроизведения
   this.initEvents = function() {
     this.createControlButtons(); // Создаем кнопки управления
@@ -51,6 +69,10 @@ function Carousel(containerSelector) {
       this.updateCarousel();
       clearInterval(this.autoplayInterval); // Остановим автовоспроизведение при ручном переключении
       this.startAutoplay(); // И перезапустим его заново
+    });
+
+    this.togglePlayButton.addEventListener('click', () => {
+      this.toggleAutoplay(); // Переключаем состояние воспроизведения
     });
 
     // Инициализация сенсорных событий
